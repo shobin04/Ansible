@@ -1,0 +1,9 @@
+# playbook.yml
+- name: Setup Nginx
+  hosts: web-server
+  become: yes
+  roles:
+    #- nginx_setup
+    #- deploy_user
+    #- tomcat_user
+    - deploy_tomcat

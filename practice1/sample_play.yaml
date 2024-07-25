@@ -1,0 +1,34 @@
+---
+- name: Install packages on remote hosts
+  hosts: web-server
+  become: yes  # Use sudo to run tasks as root
+  tasks:
+    # - name: Update apt cache
+    #   apt:
+    #     update_cache: yes
+
+    # - name: Install necessary packages
+    #   apt:
+    #     name: "{{ item }}"
+    #     state: present
+    #   loop:
+    #     - telnet
+    #     - git
+    #     - net-tools
+
+    # - name: Ensure PATH is set in /etc/environment
+    #   lineinfile:
+    #     path: /etc/environment
+    #     regexp: '^PATH='
+    #     line: 'PATH="/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/local/bin"'
+    #     state: present
+    #     create: yes
+
+    # - name: Get the current directory
+    #   command: pwd
+    #   register: current_directory
+
+    # - name: Print the current directory
+    #   debug:
+    #     msg: "The current working directory is: {{ current_directory.stdout }}"
+

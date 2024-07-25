@@ -1,0 +1,46 @@
+# nginx_setup/tasks/main.yml
+---
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+  notify: restart nginx
+
+- name: Create /var/www/html/clops directory
+  file:
+    path: "{{ nginx_root_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy index.html to /var/www/html/clops
+  copy:
+    src: "{{ index_html }}"
+    dest: "{{ nginx_root_dir }}/index.html"
+    mode: '0644'
+
+- name: Copy SSL certificate
+  copy:
+    src: clops.crt
+    dest: "{{ ssl_certificate }}"
+    mode: '0600'
+  notify: restart nginx
+
+- name: Copy SSL certificate key
+  copy:
+    src: clops.key
+    dest: "{{ ssl_certificate_key }}"
+    mode: '0600'
+  notify: restart nginx
+
+- name: Copy Nginx configuration file
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: /etc/nginx/sites-available/clops.conf
+    mode: '0644'
+  notify: restart nginx
+
+- name: Enable Nginx site configuration
+  command: nginx -t && ln -s /etc/nginx/sites-available/clops.conf /etc/nginx/sites-enabled/clops.conf
+  args:
+    creates: /etc/nginx/sites-enabled/clops.conf
+  notify: restart nginx

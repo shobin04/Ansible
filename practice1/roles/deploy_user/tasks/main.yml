@@ -1,0 +1,40 @@
+# deploy_user_setup/tasks/main.yml
+---
+- name: Ensure the deploy group exists
+  group:
+    name: "{{ deploy_groupname }}"
+    state: present
+
+- name: Ensure the deploy user exists
+  user:
+    name: "{{ deploy_username }}"
+    shell: "{{ deploy_user_shell }}"
+    group: "{{ deploy_groupname }}"
+    create_home: yes
+    home: "{{ deploy_home }}"
+    state: present
+
+- name: Ensure the home directory has correct permissions
+  file:
+    path: "{{ deploy_home }}"
+    state: directory
+    mode: "{{ deploy_home_permissions }}"
+    owner: "{{ deploy_username }}"
+    group: "{{ deploy_groupname }}"
+
+- name: Create SSH directory for deploy user
+  file:
+    path: "{{ deploy_ssh_directory }}"
+    state: directory
+    mode: "{{ deploy_ssh_permissions }}"
+    owner: "{{ deploy_username }}"
+    group: "{{ deploy_groupname }}"
+
+- name: Update timezone
+  timezone:
+    name: "{{ timezone }}"
+  notify: set timezone
+
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"

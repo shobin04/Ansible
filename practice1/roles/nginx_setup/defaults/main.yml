@@ -1,0 +1,14 @@
+# nginx_setup/defaults/main.yml
+---
+nginx_listen_ports:
+  - 80
+  - 443
+
+nginx_root_dir: /var/www/html/clops
+
+ssl_certificate: /etc/nginx/ssl/clops.crt
+ssl_certificate_key: /etc/nginx/ssl/clops.key
+
+nginx_conf_template: clops.conf.j2
+index_html: index.html
+

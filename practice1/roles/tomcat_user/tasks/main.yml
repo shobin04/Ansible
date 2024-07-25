@@ -1,0 +1,23 @@
+# tomcat_user_setup/tasks/main.yml
+---
+- name: Ensure the Tomcat group exists
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+
+- name: Ensure the Tomcat user exists
+  user:
+    name: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    home: "{{ tomcat_home }}"
+    shell: "{{ tomcat_shell }}"
+    state: present
+    system: yes  # Creates a system user
+
+- name: Ensure Tomcat home directory exists
+  file:
+    path: "{{ tomcat_home }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: "{{ tomcat_home_permissions }}"

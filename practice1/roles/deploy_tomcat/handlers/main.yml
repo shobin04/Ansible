@@ -1,0 +1,14 @@
+# deploy_tomcat/handlers/main.yml
+---
+- name: restart tomcat
+  command: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/shutdown.sh && {{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/startup.sh"
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Restart Tomcat
+  systemd:
+    name: tomcat
+    state: restarted
+    enabled: yes

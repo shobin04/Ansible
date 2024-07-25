@@ -1,0 +1,11 @@
+# deploy_user_setup/defaults/main.yml
+---
+deploy_username: deploy
+deploy_groupname: deploy
+deploy_user_shell: /bin/bash
+deploy_home: /home/{{ deploy_username }}
+deploy_home_permissions: '0755'
+deploy_ssh_directory: "{{ deploy_home }}/.ssh"
+deploy_ssh_permissions: '0700'
+timezone: "US/Pacific"
+hostname: "clops-ansible-training.com"

@@ -1,0 +1,9 @@
+# deploy_user_setup/handlers/main.yml
+---
+- name: restart sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: set timezone
+  command: timedatectl set-timezone "{{ timezone }}"

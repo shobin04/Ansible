@@ -1,0 +1,7 @@
+# tomcat_user_setup/defaults/main.yml
+---
+tomcat_user: tomcat
+tomcat_group: tomcat
+tomcat_home: /opt/tomcat
+tomcat_shell: /bin/false  # No login shell for the service account
+tomcat_home_permissions: '0755'

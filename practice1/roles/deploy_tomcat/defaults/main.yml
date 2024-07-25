@@ -1,0 +1,8 @@
+# deploy_tomcat/defaults/main.yml
+---
+tomcat_version: 9.0.91
+tomcat_url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz"
+tomcat_install_dir: /opt/tomcat
+tomcat_port: 8082
+helloworld_war: helloworld.war
+java_home: /usr/lib/jvm/java-17-openjdk-amd64  # Update this to your JDK path
